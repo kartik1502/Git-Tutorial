@@ -1,0 +1,1 @@
+mvn clean verify sonar:sonar -Dsonar.projectKey=employeesmanagement -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_3a8e222c23135a6fec62ad65ce83b4fc74b9e922
