@@ -20,15 +20,15 @@ public class EmployeeAttendance {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int employeeAttendanceId;
-	
+
 	@ManyToOne
 	private Employee employees;
-	
+
 	private LocalTime swipeInTime;
-	
+
 	private LocalTime swipeOutTime;
-	
+
 	@CreationTimestamp
 	private LocalDate swipeDate;
-	
+
 }

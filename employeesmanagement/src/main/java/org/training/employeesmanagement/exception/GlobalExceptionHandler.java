@@ -23,13 +23,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		for (ObjectError error : ex.getBindingResult().getAllErrors()) {
 			errorDetails.add(error.getDefaultMessage());
 		}
-		ErrorResponse response = new ErrorResponse(4008l, errorDetails);
+		ErrorResponse response = new ErrorResponse(400l, errorDetails);
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 	}
 
-	@ExceptionHandler(value = NoSuchEmployeeExists.class)
+	@ExceptionHandler(value = EmployeeAlreadyExists.class)
+	public ResponseEntity<Object> exception(EmployeeAlreadyExists exception) {
+		return new ResponseEntity<>("Employee already exists", HttpStatus.CONFLICT);
+
+	}
+  
+  @ExceptionHandler(value = NoSuchEmployeeExists.class)
 	public ResponseEntity<Object> exception(NoSuchEmployeeExists exception) {
 		return new ResponseEntity<>("No such employee exists", HttpStatus.NOT_FOUND);
 	}
-
 }
+
+

@@ -1,5 +1,6 @@
 package org.training.employeesmanagement.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,4 +22,5 @@ public class EmployeeAttendanceController {
 	public ResponseEntity<EmployeeAttendance> addDetails(@RequestParam int emplId) {
 		return new ResponseEntity<>(service.addDetails(emplId), HttpStatus.OK);
 	}
+
 }
