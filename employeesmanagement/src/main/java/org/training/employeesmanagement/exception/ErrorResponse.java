@@ -32,5 +32,4 @@ public class ErrorResponse {
 	public void setErrorDetails(List<String> errorDetails) {
 		this.errorDetails = errorDetails;
 	}
-
 }

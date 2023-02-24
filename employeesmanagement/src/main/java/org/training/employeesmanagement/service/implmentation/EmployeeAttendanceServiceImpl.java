@@ -20,4 +20,34 @@ import org.training.employeesmanagement.service.EmployeeAttendanceService;
 @Service
 public class EmployeeAttendanceServiceImpl implements EmployeeAttendanceService {
 
+	@Autowired
+	private EmployeeRepository employeeRepository;
+
+	@Autowired
+	private EmployeeAttendanceRepository attendanceRepository;
+	
+	Logger logger = LoggerFactory.getLogger(EmployeeAttendanceServiceImpl.class);
+
+	@Override
+	public EmployeeAttendance addDetails(int emplId) {
+
+		Optional<Employee> employee = employeeRepository.findById(emplId);
+		if (employee.isEmpty()) {
+			logger.info("No such employee exception handled");
+			throw new NoSuchEmployeeExists("Employee with emplId: " + emplId + " dose not exists");
+		}
+		EmployeeAttendance attendance = attendanceRepository
+				.findEmployeeAttendanceBySwipeDateAndEmployees(LocalDate.now(), employee.get());
+		if (attendance == null) {
+			EmployeeAttendance employeeAttendance = new EmployeeAttendance();
+			employeeAttendance.setEmployees(employee.get());
+			employeeAttendance.setSwipeDate(LocalDate.now());
+			employeeAttendance.setSwipeInTime(LocalTime.now());
+			employeeAttendance.setSwipeOutTime(null);
+			return attendanceRepository.save(employeeAttendance);
+		} else {
+			attendance.setSwipeOutTime(LocalTime.now());
+			return attendanceRepository.save(attendance);
+		}
+	}
 }

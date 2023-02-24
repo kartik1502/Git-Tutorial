@@ -33,5 +33,4 @@ public class EmployeeController {
 		employee.setRole(employeeDto.getRole());
 		return new ResponseEntity<>(employeeService.registerEmployee(employee), HttpStatus.OK);
 	}
-
 }
